@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { ItemModel } from './../../models/item.model';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-item-edit',
@@ -7,9 +10,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ItemEditComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public diag: MatDialogRef<ItemEditComponent>,
+    @Inject(MAT_DIALOG_DATA) public item: ItemModel
+  ) { }
 
   ngOnInit(): void {
   }
+
+
+  close() {
+    this.diag.close()
+  }
+
+  onFormSubmit(form: NgForm) {
+
+    if (form.invalid) return
+
+    const newItem = {
+      ...this.item,
+      ...form.value
+    }
+
+    this.diag.close(newItem)
+  }
+
 
 }

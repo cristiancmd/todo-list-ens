@@ -2,6 +2,8 @@ import { FolderModel } from './../../models/folder.model';
 import { FolderService } from './../../services/folder.service';
 import { ItemModel } from './../../models/item.model';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatDialogComponent } from 'src/app/public/shared/mat-dialog/mat-dialog.component';
 
 @Component({
   selector: 'app-folders',
@@ -15,7 +17,7 @@ export class FoldersComponent implements OnInit {
 
   folders: FolderModel[] = []
 
-  constructor(private _folderSvc: FolderService) { }
+  constructor(private _folderSvc: FolderService, private _matDiag: MatDialog) { }
 
   ngOnInit(): void {
     this.getFolderList();
@@ -33,7 +35,7 @@ export class FoldersComponent implements OnInit {
 
   addFolder(aName: string) {
 
-    if(aName=="") return;
+    if (! /\S/.test(aName)) return;
 
     let folder = new FolderModel
     folder.name = aName;
@@ -46,11 +48,22 @@ export class FoldersComponent implements OnInit {
 
   }
 
-  removeFolder(folder:FolderModel){
-    this._folderSvc.removeFolder(folder.id!).subscribe({
-      next: (data: FolderModel) => {
-        console.log('eliminada:' , folder.name);
-        this.getFolderList();
+  removeFolder(folder: FolderModel) {
+
+    let diag = this._matDiag.open(MatDialogComponent, {
+      data: {
+        item: folder,
+      },
+    });
+    diag.afterClosed().subscribe((res) => {
+      if (res) {
+        console.log(res);
+        this._folderSvc.removeFolder(folder.id!).subscribe({
+          next: (data: FolderModel) => {
+            console.log('eliminada:', folder.name);
+            this.getFolderList();
+          }
+        })
       }
     })
   }

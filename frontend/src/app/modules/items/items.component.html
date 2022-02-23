@@ -7,47 +7,45 @@
   </ul>
 </nav>
 
-  <div class="container">
-    <div class="todo-list" >
-      <div
-        class="item"
-        *ngFor="let item of items"
-        [class.completed]="item.checked"
-        (click)="onItemClicked(item)"
-      >
-        <div class="checkbox">
-          <i class="material-icons">check</i>
+<div class="container">
+  <div class="todo-list">
+    <div
+      class="item"
+      *ngFor="let item of items"
+      [class.completed]="item.checked"
+      (click)="onItemClicked(item)"
+    >
+      <div class="checkbox">
+        <i class="material-icons">check</i>
+      </div>
+
+      <div>{{ item.name }}</div>
+
+      <div class="controls" (click)="$event.stopPropagation()">
+        <div (click)="this.onItemEdit(item)" class="button">
+          <i class="material-icons">edit</i>
         </div>
 
-        <div>{{ item.name }}</div>
-
-        <div class="controls" (click)="$event.stopPropagation()">
-          <div class="button">
-            <i class="material-icons">edit</i>
-          </div>
-
-          <div (click)="this.onItemRemove(item)" class="button danger">
-            <i class="material-icons">delete</i>
-          </div>
+        <div (click)="this.onItemRemove(item)" class="button danger">
+          <i class="material-icons">delete</i>
         </div>
       </div>
     </div>
-
-    <div class="field is-grouped">
-      <p class="control is-expanded">
-        <input
-          class="input"
-          id="inputVal"
-          name="inputVal"
-          #inputVal
-          type="text"
-          placeholder="Task name"
-        />
-      </p>
-      <p class="control">
-        <a (click)="addItem()" class="button is-info"> Add </a>
-      </p>
-    </div>
-
-
   </div>
+
+  <div class="field is-grouped">
+    <p class="control is-expanded">
+      <input
+        class="input"
+        id="inputVal"
+        name="inputVal"
+        #inputVal
+        type="text"
+        placeholder="Task name"
+      />
+    </p>
+    <p class="control">
+      <a (click)="addItem()" class="button is-info"> Add </a>
+    </p>
+  </div>
+</div>

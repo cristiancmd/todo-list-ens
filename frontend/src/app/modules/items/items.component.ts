@@ -1,7 +1,10 @@
+import { ItemEditComponent } from './../item-edit/item-edit.component';
 import { ItemService } from './../../services/item.service';
 import { ItemModel } from './../../models/item.model';
 import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { MatDialogComponent } from 'src/app/public/shared/mat-dialog/mat-dialog.component';
 
 @Component({
   selector: 'app-items',
@@ -19,7 +22,8 @@ export class ItemsComponent implements OnInit, OnDestroy {
 
 
   constructor(private route: ActivatedRoute,
-    private _itemSvc: ItemService) {
+    private _itemSvc: ItemService,
+    private _matDiag: MatDialog) {
 
 
   }
@@ -46,7 +50,8 @@ export class ItemsComponent implements OnInit, OnDestroy {
   addItem() {
 
     const val = this.inputVal.nativeElement.value;
-    if (val == '') return;
+    if (! /\S/.test(val)) return;
+
     const item = new ItemModel
     item.name = val;
     this._itemSvc.addItem(item, this.id!).subscribe({
@@ -56,6 +61,30 @@ export class ItemsComponent implements OnInit, OnDestroy {
         this.inputVal.nativeElement.value = ""
       }
 
+    })
+
+  }
+
+  onItemEdit(item:ItemModel){
+    console.log(item);
+
+    let diag = this._matDiag.open(ItemEditComponent, {
+      width: '500px',
+      data: item
+    });
+
+    diag.afterClosed().subscribe((res) => {
+      if (res) {
+        const newItem = new ItemModel;
+        newItem.name = res.text;
+        newItem.id = res.id;
+        this._itemSvc.updateItem(newItem).subscribe({
+          next: (data: ItemModel) => {
+            this.getItems(this.id!);
+          },
+          error: (e) => console.log(e)
+        })
+      }
     })
 
   }
@@ -78,6 +107,8 @@ export class ItemsComponent implements OnInit, OnDestroy {
   }
 
   onItemRemove(item: ItemModel) {
+
+
     this._itemSvc.removeItem(item.id!).subscribe({
       next: (data: ItemModel) => {
         this.getItems(this.id!);
