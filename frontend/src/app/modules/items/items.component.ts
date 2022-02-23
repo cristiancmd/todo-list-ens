@@ -4,7 +4,6 @@ import { ItemModel } from './../../models/item.model';
 import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { MatDialogComponent } from 'src/app/public/shared/mat-dialog/mat-dialog.component';
 
 @Component({
   selector: 'app-items',
@@ -16,6 +15,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
   items: ItemModel[] = [];
   private sub: any;
   id?: number;
+  name:string = 'Items'
 
   @ViewChild('inputVal')
   inputVal!: ElementRef;
@@ -33,12 +33,16 @@ export class ItemsComponent implements OnInit, OnDestroy {
       this.id = +params['id'];
       this.getItems(this.id)
 
-
     });
+
 
   }
 
+
+
   getItems(id: number) {
+    if(history.state.data)
+        this.name = history.state.data.name;
     this.sub = this._itemSvc.getItemsFor(id).subscribe({
       next: (data: ItemModel[]) => {
         this.items = data;
@@ -48,25 +52,20 @@ export class ItemsComponent implements OnInit, OnDestroy {
   }
 
   addItem() {
-
     const val = this.inputVal.nativeElement.value;
     if (! /\S/.test(val)) return;
-
     const item = new ItemModel
     item.name = val;
     this._itemSvc.addItem(item, this.id!).subscribe({
       next: (data: ItemModel) => {
-        console.log(data);
         this.getItems(this.id!);
         this.inputVal.nativeElement.value = ""
       }
-
     })
 
   }
 
   onItemEdit(item:ItemModel){
-    console.log(item);
 
     let diag = this._matDiag.open(ItemEditComponent, {
       width: '500px',
@@ -107,8 +106,6 @@ export class ItemsComponent implements OnInit, OnDestroy {
   }
 
   onItemRemove(item: ItemModel) {
-
-
     this._itemSvc.removeItem(item.id!).subscribe({
       next: (data: ItemModel) => {
         this.getItems(this.id!);
@@ -117,8 +114,6 @@ export class ItemsComponent implements OnInit, OnDestroy {
     })
 
   }
-
-
 
 
 

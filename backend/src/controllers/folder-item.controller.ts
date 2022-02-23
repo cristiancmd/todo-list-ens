@@ -3,7 +3,7 @@ import {
   CountSchema,
   Filter,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
   del,
@@ -13,11 +13,11 @@ import {
   param,
   patch,
   post,
-  requestBody,
+  requestBody
 } from '@loopback/rest';
 import {
   Folder,
-  Item,
+  Item
 } from '../models';
 import {FolderRepository} from '../repositories';
 
@@ -42,7 +42,7 @@ export class FolderItemController {
     @param.path.number('id') id: number,
     @param.query.object('filter') filter?: Filter<Item>,
   ): Promise<Item[]> {
-    return this.folderRepository.items(id).find(filter);
+    return this.folderRepository.items(id).find(filter)
   }
 
   @post('/folders/{id}/items', {

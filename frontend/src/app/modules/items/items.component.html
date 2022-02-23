@@ -1,13 +1,18 @@
 <nav class="breadcrumb mt-4 ml-4" aria-label="breadcrumbs">
   <ul>
-    <li class="is-size-3"><a routerLink="/home">Folders</a></li>
-    <li class="is-active is-size-3">
-      <a href="#" aria-current="page">Items</a>
+    <li class="is-size-4"><a routerLink="/home">Folders</a></li>
+    <li class="is-active is-size-4">
+      <a href="#" aria-current="page">{{this.name}}</a>
     </li>
+
   </ul>
 </nav>
 
+
 <div class="container">
+  <div *ngIf="items.length<1">
+    <p class="subtitle is-5">No items</p>
+  </div>
   <div class="todo-list">
     <div
       class="item"

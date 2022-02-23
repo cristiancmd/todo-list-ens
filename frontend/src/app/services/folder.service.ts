@@ -19,7 +19,7 @@ export class FolderService {
   }
 
   getFolders():Observable<FolderModel[]> {
-    return this.http.get<FolderModel[]>(`${this.url}/folders`)
+    return this.http.get<FolderModel[]>(`${this.url}/folders?filter%5Border%5D=id%20DESC`)
   }
 
   removeFolder(id:number):Observable<FolderModel>{

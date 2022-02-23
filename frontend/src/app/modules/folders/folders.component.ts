@@ -25,6 +25,8 @@ export class FoldersComponent implements OnInit {
   }
 
 
+
+
   getFolderList() {
     this._folderSvc.getFolders().subscribe({
       next: (data: FolderModel[]) => {

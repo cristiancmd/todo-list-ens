@@ -1,7 +1,7 @@
 <nav class="breadcrumb mt-4 ml-4" aria-label="breadcrumbs">
   <ul>
     <li class="is-active">
-      <a href="#" aria-current="page"> <h1 class="is-size-3">Folders</h1> </a>
+      <a href="#" aria-current="page"> <h1 class="is-size-4">Folders</h1> </a>
     </li>
   </ul>
 </nav>
@@ -10,8 +10,9 @@
   <div class="todo-list">
     <div
       *ngFor="let folder of folders"
-      [routerLink]="['/folders', folder.id]"
       class="item"
+      [routerLink]="['/folders', folder.id]"
+      [state]="{ data: folder }"
     >
       <div class="mr-2">
         <i class="material-icons">folder</i>

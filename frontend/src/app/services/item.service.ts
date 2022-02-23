@@ -20,7 +20,7 @@ export class ItemService {
   }
 
   getItemsFor(folderId:number):Observable<ItemModel[]> {
-    return this.http.get<ItemModel[]>(`${this.url}/folders/${folderId}/items`)
+    return this.http.get<ItemModel[]>(`${this.url}/folders/${folderId}/items?filter%5Border%5D=id%20DESC`)
   }
 
   removeItem(id:number):Observable<ItemModel>{
