@@ -1,0 +1,93 @@
+.item {
+  display: flex;
+  font-size: 18px;
+  padding: 8px 4px;
+  cursor: pointer;
+
+  .checkbox {
+    margin-right: 10px;
+    border: 1px solid rgb(192, 192, 192);
+    border-radius: 5px;
+    height: 25px;
+    width: 25px;
+    background: rgb(255, 253, 250);
+
+    i.material-icons {
+      margin: 0.1em;
+      font-size: 20px;
+      color: rgb(228, 226, 226);
+      opacity: 0;
+
+      transition: opacity 0.3s;
+    }
+
+
+  }
+  &.completed {
+    color: rgb(129, 129, 129);
+  }
+}
+
+.item:hover .checkbox {
+  i.material-icons {
+    opacity: 0.9;
+  }
+}
+
+.item.completed .checkbox {
+  i.material-icons {
+    opacity: 1;
+    color: rgb(255, 255, 255);
+  }
+  background: rgb(235, 161, 52);
+  border: 0px
+}
+
+.item .controls {
+  position:relative;
+  bottom: 0;
+  right: 0;
+  margin-left: 100px;
+  display: flex;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.item:hover  .controls{
+  opacity: 1;
+  visibility: visible;
+}
+
+.controls .button{
+  background-color: rgb(231, 243, 243);
+  font-size: small;
+}
+
+.controls .button.danger:active i.material-icons {
+  color:red
+}
+
+
+.todo-list{
+  height: 80%;
+  max-width: 80%;
+  max-height: 40%;
+  min-height: 300px;
+  overflow-y:auto;
+  position:relative;
+
+}
+
+.field {
+  width: 80%;
+  margin-top: 1em;
+}
+
+.container{
+  display: flex;
+  max-height: 50%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4em;
+}

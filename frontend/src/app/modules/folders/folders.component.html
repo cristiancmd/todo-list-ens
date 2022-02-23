@@ -1,0 +1,46 @@
+<nav class="breadcrumb mt-4 ml-4" aria-label="breadcrumbs">
+  <ul>
+    <li class="is-active">
+      <a href="#" aria-current="page"> <h1 class="is-size-3">Folders</h1> </a>
+    </li>
+  </ul>
+</nav>
+
+  <div class="container">
+    <div class="todo-list">
+      <div
+        *ngFor="let folder of folders"
+        [routerLink]="['/folders', folder.id]"
+        class="item"
+      >
+        <div class="mr-2">
+          <i class="material-icons">folder</i>
+        </div>
+        <div>{{ folder.name }}</div>
+
+        <div class="controls" (click)="$event.stopPropagation()">
+          <div class="button danger" (click)="this.removeFolder(folder)">
+            <i class="material-icons">delete</i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field is-grouped ">
+      <p class="control is-expanded">
+        <input
+          class="input"
+          id="inputVal"
+          name="inputVal"
+          #inputVal
+          type="text"
+          placeholder="Folder name"
+        />
+      </p>
+      <p class="control">
+        <a (click)="this.addFolder(inputVal.value)" class="button is-info">
+          Add
+        </a>
+      </p>
+    </div>
+  </div>
