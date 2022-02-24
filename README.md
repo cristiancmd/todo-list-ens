@@ -1,1 +1,22 @@
-# todo-list-ens
+# ToDo App - Ensolvers
+
+## Deployed App:
+
+## [Here](https:///)
+
+### Required: NodeJs 12+, Npm 8+
+
+## Starter script:
+
+From this folder execute:
+
+```bash
+(cd backend && npm i && npm run migrate && npm run start) & cd frontend && npm i && ng serve
+```
+
+Wait for _✔_ _Compiled successfully_ message.
+
+Frontend runs at: http://localhost:4200/
+Backend runs at: http://localhost:3000/
+
+_# Framework info in each folder_
