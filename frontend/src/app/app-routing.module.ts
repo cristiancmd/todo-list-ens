@@ -11,10 +11,10 @@ const routes: Routes = [
   { path: 'items/edit', component: ItemEditComponent },
   { path: 'folders/:id', component: ItemsComponent },
   { path: 'home', component: FoldersComponent},
-  { path: '**', component: FoldersComponent},
+  { path: '**', component: UserComponent},
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
 
