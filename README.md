@@ -20,4 +20,10 @@ Frontend runs at: http://localhost:4200/
 
 Backend runs at: http://localhost:3000/
 
+## Login credentials:
+
+username: test
+
+password: test
+
 _# Framework info in each folder_
