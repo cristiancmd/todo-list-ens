@@ -4,27 +4,23 @@ import {
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
-  put,
-  del,
-  requestBody,
-  response,
+  del, get,
+  getModelSchemaRef, param, patch, post, put, requestBody,
+  response
 } from '@loopback/rest';
 import {Folder} from '../models';
-import {FolderRepository} from '../repositories';
+import {FolderRepository, ItemRepository} from '../repositories';
 
 export class FolderController {
   constructor(
+    @repository(ItemRepository)
+    public itemRepository: ItemRepository,
     @repository(FolderRepository)
-    public folderRepository : FolderRepository,
-  ) {}
+    public folderRepository: FolderRepository,
+  ) { }
 
   @post('/folders')
   @response(200, {
@@ -145,6 +141,7 @@ export class FolderController {
     description: 'Folder DELETE success',
   })
   async deleteById(@param.path.number('id') id: number): Promise<void> {
+    await this.itemRepository.deleteAll({folderId: id});
     await this.folderRepository.deleteById(id);
   }
 }

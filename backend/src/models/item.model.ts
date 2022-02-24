@@ -1,21 +1,23 @@
 import {belongsTo, Entity, model, property} from '@loopback/repository';
 import {Folder} from './folder.model';
 
-@model({
-  settings: {
-    foreignKeys: {
-      // eslint-disable-next-line @typescript-eslint/naming-convention
-      fk_item_folderId: {
-        name: 'fk_item_folderId',
-        entity: 'Folder',
-        entityKey: 'id',
-        foreignKey: 'folderId',
-        onUpdate: 'cascade', // restrict|cascade|set null|no action|set default
-        onDelete: 'cascade',
+@model(
+  {
+    settings: {
+      foreignKeys: {
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        fk_item_folderId: {
+          name: 'fk_item_folderId',
+          entity: 'Folder',
+          entityKey: 'id',
+          foreignKey: 'folderId',
+          onUpdate: 'CASCADE', // restrict|cascade|set null|no action|set default
+          onDelete: 'CASCADE',
+        },
       },
-    },
-  },
-})
+    }
+  }
+)
 export class Item extends Entity {
   @property({
     type: 'number',
@@ -35,6 +37,8 @@ export class Item extends Entity {
     type: 'string',
   })
   name: string;
+
+
 
   @belongsTo(() => Folder)
   folderId: number;

@@ -2,14 +2,10 @@ import {inject, lifeCycleObserver, LifeCycleObserver} from '@loopback/core';
 import {juggler} from '@loopback/repository';
 
 const config = {
-  name: 'mysql',
-  connector: 'mysql',
-  url: '',
-  host: 'localhost',
-  port: 3306,
-  user: 'root',
-  password: '',
-  database: 'todo_ensolvers'
+  name: 'sqlite',
+  connector: 'sqlite3',
+  file: 'db.sqlite',
+  debug: true
 };
 
 // Observe application's life cycle to disconnect the datasource when
@@ -17,13 +13,13 @@ const config = {
 // gracefully. The `stop()` method is inherited from `juggler.DataSource`.
 // Learn more at https://loopback.io/doc/en/lb4/Life-cycle.html
 @lifeCycleObserver('datasource')
-export class MysqlDataSource extends juggler.DataSource
+export class SqliteDataSource extends juggler.DataSource
   implements LifeCycleObserver {
-  static dataSourceName = 'mysql';
+  static dataSourceName = 'sqlite';
   static readonly defaultConfig = config;
 
   constructor(
-    @inject('datasources.config.mysql', {optional: true})
+    @inject('datasources.config.sqlite', {optional: true})
     dsConfig: object = config,
   ) {
     super(dsConfig);

@@ -3,8 +3,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FoldersComponent } from './modules/folders/folders.component';
 import { ItemsComponent } from './modules/items/items.component';
+import { UserComponent } from './modules/user/user.component';
 
 const routes: Routes = [
+  { path: 'login', component: UserComponent },
   { path: 'items/new', component: ItemEditComponent },
   { path: 'items/edit', component: ItemEditComponent },
   { path: 'folders/:id', component: ItemsComponent },

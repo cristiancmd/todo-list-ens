@@ -56,6 +56,8 @@
     "@loopback/rest-explorer": "^4.1.0",
     "@loopback/service-proxy": "^4.1.0",
     "loopback-connector-mysql": "^5.4.4",
+    "loopback-connector-sqlite3": "^3.0.0",
+    "sqlite3": "^5.0.2",
     "tslib": "^2.0.0"
   },
   "devDependencies": {

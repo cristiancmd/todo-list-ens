@@ -1,7 +1,10 @@
-import {Entity, model, property, hasMany} from '@loopback/repository';
+import {Entity, hasMany, model, property} from '@loopback/repository';
 import {Item} from './item.model';
 
-@model()
+@model({
+
+}
+)
 export class Folder extends Entity {
   @property({
     type: 'number',

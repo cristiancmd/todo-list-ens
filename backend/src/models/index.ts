@@ -1,2 +1,3 @@
-export * from './item.model';
 export * from './folder.model';
+export * from './item.model';
+

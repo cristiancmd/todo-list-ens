@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDialogComponent } from './public/shared/mat-dialog/mat-dialog.component';
+import { UserComponent } from './modules/user/user.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { MatDialogComponent } from './public/shared/mat-dialog/mat-dialog.compon
     ItemEditComponent,
     HeaderComponent,
     MatDialogComponent,
+    UserComponent,
 
   ],
   imports: [
