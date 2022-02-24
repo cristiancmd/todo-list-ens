@@ -26,4 +26,4 @@ username: test
 
 password: test
 
-_# Framework info in each folder_
+_# Framework specific info inside each folder_
