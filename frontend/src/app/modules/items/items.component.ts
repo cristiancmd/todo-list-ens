@@ -94,6 +94,10 @@ export class ItemsComponent implements OnInit, OnDestroy {
     newItem.checked = !item.checked
     newItem.name = item.name
     newItem.id = item.id
+
+    let i = this.items.findIndex(e=> e.id == newItem.id)
+    this.items[i] = newItem ;
+
     this._itemSvc.updateItem(newItem).subscribe({
       next: (data: ItemModel) => {
         this.getItems(this.id!);
