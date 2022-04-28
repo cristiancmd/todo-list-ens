@@ -1,4 +1,4 @@
-# ToDo App - Ensolvers
+# ToDo App
 
 ## Deployed App:
 
